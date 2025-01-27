@@ -77,26 +77,21 @@ npm run build-db
 ```bash
 npm run dev
 ```
-
-🌟 Future Improvements
-Migrate frontend to React/Vue.js for enhanced interactivity
-Implement email notifications for bookings
-Add payment gateway integration
-Introduce event categories and search functionality
-Add analytics dashboard for organizers
+## 🌟 Future Improvements <br>
+Migrate frontend to React/Vue.js for enhanced interactivity <br>
+Introduce event categories and search functionality <br>
+Improve analytics dashboard for organizers <br>
 Implement test coverage
-🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
 
-📝 License
+## 📝 License
 This project is licensed under the ISC License.
 
-🎓 Academic Context
+## 🎓 Academic Context
 This project was developed as part of a Databases, Networks, and the Web course for University of London, demonstrating practical implementation of:
 
-Database design and management
-Web application architecture
-User authentication and authorization
-Input validation and security practices
-Session management
-RESTful API design
+Database design and management <br>
+Web application architecture <br>
+User authentication and authorization <br>
+Input validation and security practices <br>
+Session management <br>
+RESTful API design <br>
