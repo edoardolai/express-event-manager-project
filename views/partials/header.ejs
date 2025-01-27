@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/output.css" rel="stylesheet">
+    <title>Event Manager</title>
+</head>
+
+<body class="min-h-screen bg-gray-100">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-2xl font-bold text-gray-800">Event Manager</a>
+                <% if (locals.session && locals.session.organizerId) { %>
+                    <div class="flex items-center space-x-4">
+                        <form action="/organizers/logout" method="POST" class="inline">
+                            <button type="submit"
+                                class="text-gray-600 hover:text-red-700/65 px-4 py-2 rounded bg-slate-200/50">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+    </nav>

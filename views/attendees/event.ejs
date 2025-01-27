@@ -1,0 +1,104 @@
+<%- include('../partials/header') %>
+
+    <main class="max-w-3xl mx-auto p-6">
+        <div class="bg-white shadow-md rounded-lg p-8">
+            <!-- Event Details -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                    <%= event.title %>
+                </h1>
+                <p class="text-gray-600 mb-4">
+                    <%= event.description %>
+                </p>
+                <p class="text-gray-800">Date: <%= event.event_date %>
+                </p>
+            </div>
+
+            <!-- Ticket Info -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <% if (event.full_price_ticket_cost>0) {%>
+                        <h3 class="font-semibold mb-2">Full Price Tickets</h3>
+                        <% }else { %>
+                            <h3 class="font-semibold mb-2">Free entry Tickets</h3>
+                            <%}%>
+                                <p>Available: <%= event.full_price_ticket_count %>
+                                </p>
+                                <p>Price: £<%= event.full_price_ticket_cost %>
+                                </p>
+                </div>
+
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <% if (event.full_price_ticket_cost>0) {%>
+                        <h3 class="font-semibold mb-2">Concession Tickets</h3>
+                        <% }else { %>
+                            <h3 class="font-semibold mb-2">Free entry Tickets</h3>
+                            <%}%>
+                                <p>Available: <%= event.concession_ticket_count %>
+                                </p>
+                                <p>Price: £<%= event.concession_ticket_cost %>
+                                </p>
+                </div>
+            </div>
+
+            <%- include("../partials/error.ejs", { errorMessage: errorMessage }) %>
+
+                <% if (parseInt(event.full_price_ticket_count)===0 && parseInt(event.concession_ticket_count)===0) { %>
+                    <div class="text-center py-8">
+                        <p class="text-lg text-gray-600">Oops! This event is fully booked.</p>
+                        <a href="/attendees/home" class="inline-block mt-4 text-blue-600 hover:text-blue-800">
+                            ← Back to Events
+                        </a>
+                    </div>
+                    <% } else { %>
+                        <form action="/attendees/book-event/<%= event.id %>" method="POST" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <% if (event.full_price_ticket_cost>0) {%>
+                                        <label class="block text-gray-700 mb-2">Full Price Tickets</label>
+                                        <% }else { %>
+                                            <label> Free entry tickets</label>
+                                            <%}%>
+                                                <input type="number" name="fullPriceTickets" min="0"
+                                                    max="<%= event.full_price_ticket_count %>" value="0"
+                                                    class="w-full p-2 border rounded">
+                                </div>
+                                <div>
+                                    <% if (event.full_price_ticket_cost>0) {%>
+                                        <label class="block text-gray-700 mb-2">Concession Tickets</label>
+                                        <% }else { %>
+                                            <label> Free entry tickets</label>
+                                            <%}%>
+                                                <input type="number" name="concessionTickets" min="0"
+                                                    max="<%= event.concession_ticket_count %>" value="0"
+                                                    class="w-full p-2 border rounded">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Your Name</label>
+                                    <input type="text" name="attendeeName" required class="w-full p-2 border rounded"
+                                        value="<%= event.attendeeName || '' %>">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Your Email</label>
+                                    <input type="email" name="attendeeEmail" required class="w-full p-2 border rounded"
+                                        value="<%= event.attendeeEmail || '' %>">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <a href="/attendees/home" class="text-gray-600 hover:text-gray-800">← Back to
+                                    Events</a>
+                                <button type="submit"
+                                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                                    Book Tickets
+                                </button>
+                            </div>
+                        </form>
+                        <% } %>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>

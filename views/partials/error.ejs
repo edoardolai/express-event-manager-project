@@ -1,0 +1,21 @@
+<!-- START OF CODE WRITTEN WITHOUT ASSISTANCE -->
+
+<!-- handle both errors coming as list (validation errors) or as a string (network/db errors) -->
+<% if (Array.isArray(errorMessage)) { %>
+    <div class="bg-red-50 border border-red-400 rounded p-4 mb-6">
+        <ul class="list-disc pl-4">
+            <% errorMessage.forEach(error=> { %>
+                <li class="text-red-600">
+                    <%= error %>
+                </li>
+                <% }) %>
+        </ul>
+    </div>
+    <% } else if (errorMessage) { %>
+        <div class="bg-red-50 border border-red-400 rounded p-4 mb-6">
+            <p class="text-red-600">
+                <%= errorMessage %>
+            </p>
+        </div>
+        <% } %>
+            <!-- END OF CODE WRITTEN WITHOUT ASSISTANCE -->

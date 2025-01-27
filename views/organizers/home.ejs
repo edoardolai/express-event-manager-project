@@ -1,0 +1,174 @@
+<!-- START OF CODE WRITTEN WITHOUT ASSISTANCE -->
+
+<%- include('../partials/header') %>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="bg-white shadow-md rounded-lg p-8">
+            <!-- Header -->
+            <div class="mb-2">
+                <span class=" text-gray-500 uppercase tracking-wider">Organizer Dashboard</span>
+            </div>
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">
+                        <%= siteName %>
+                    </h1>
+                    <p class="text-gray-600">
+                        <%= siteDescription %>
+                    </p>
+                </div>
+
+                <div class="space-x-4">
+                    <a href="/organizers/site-settings" class="text-gray-600 hover:text-gray-800">Site Settings</a>
+                    <form action="/organizers/create-event" method="POST" class="inline">
+                        <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+                            Create New Event
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Published Events -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold mb-4">Published Events</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Event Name
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tickets</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Published
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <% if (publishedEvents.length===0) { %>
+                                <tr>
+                                    <td colspan="4" class="px-6 py-4 text-gray-500 italic">No published events</td>
+                                </tr>
+                                <% } else { %>
+                                    <% publishedEvents.forEach(event=> { %>
+                                        <tr>
+                                            <td class="px-6 py-4">
+                                                <%= event.title %>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <%= event.event_date %>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <strong>
+                                                    Full Price:
+                                                </strong>
+                                                <%= event.full_price_ticket_count %> @ £<%= event.full_price_ticket_cost
+                                                        %><br>
+                                                        <strong>
+                                                            Concession:
+                                                        </strong>
+
+                                                        <%= event.concession_ticket_count %> @ £<%=
+                                                                event.concession_ticket_cost %>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <%= event.created_at %>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <%= event.published_at %>
+                                            </td>
+                                            <td class="px-6 py-4 space-x-2">
+                                                <a href="/organizers/event/<%= event.id %>"
+                                                    class="text-blue-600 hover:text-blue-800">View </a>
+                                                <form id="deleteForm<%= event.id %>"
+                                                    action="/organizers/delete-event/<%= event.id %>" method="POST"
+                                                    class="inline">
+                                                    <button type="button" onclick="confirmDelete('<%= event.id %>')"
+                                                        class="text-red-600 hover:text-red-800">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                        <% }); %>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Draft Events -->
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Draft Events</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Event Name
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tickets</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <% if (draftEvents.length===0) { %>
+                                <tr>
+                                    <td colspan="4" class="px-6 py-4 text-gray-500 italic">No draft events</td>
+                                </tr>
+                                <% } else { %>
+                                    <% draftEvents.forEach(event=> { %>
+                                        <tr>
+                                            <td class="px-6 py-4">
+                                                <%= event.title %>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <%= event.event_date %>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                FP: <%= event.full_price_ticket_count %> @ £<%=
+                                                        event.full_price_ticket_cost %><br>
+                                                        Con: <%= event.concession_ticket_count %> @ £<%=
+                                                                event.concession_ticket_cost %>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <%= event.created_at %>
+                                            </td>
+                                            <td class="px-6 py-4 space-x-2">
+                                                <a href="/organizers/event/<%= event.id %>/edit"
+                                                    class="text-blue-600 hover:text-blue-800">Edit</a>
+                                                <form id="publishForm<%= event.id %>"
+                                                    action="/organizers/publish-event/<%= event.id %>" method="POST"
+                                                    class="inline">
+                                                    <button type="button" onclick="confirmPublish('<%= event.id %>')"
+                                                        class="text-green-600 hover:text-green-800">
+                                                        Publish
+                                                    </button>
+                                                </form>
+                                                <form id="deleteForm<%= event.id %>"
+                                                    action="/organizers/delete-event/<%= event.id %>" method="POST"
+                                                    class="inline">
+                                                    <button type="button" onclick="confirmDelete('<%= event.id %>')"
+                                                        class="text-red-600 hover:text-red-800">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../partials/confirmation-dialog') %>
+        <%- include('../partials/footer') %>
+
+            <script src="/js/dialog.js"></script>
+            <!-- END OF CODE WRITTEN WITHOUT ASSISTANCE -->

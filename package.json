@@ -1,0 +1,33 @@
+{
+  "name": "cm2040_template",
+  "version": "1.0.0",
+  "description": "A template for the mid-term assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-db": "cat db_schema.sql | sqlite3 database.db && chmod -R u+w database.db #build anew database from the sql file",
+    "clean-db": "rm database.db #remove the old database",
+    "build-db-win": "sqlite3 database.db < db_schema.sql",
+    "clean-db-win": "del database.db",
+    "prestart": "tailwindcss -i ./public/css/main.css -o ./public/css/output.css",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "type": "module",
+  "author": "Edoardo Lai",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "nodemon": "^3.1.9",
+    "sqlite3": "^5.1.2",
+    "tailwindcss": "^3.4.17"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  }
+}

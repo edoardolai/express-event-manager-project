@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="bg-white shadow-md rounded-lg p-8 pt-4">
+            <div class="mb-2 pt-0">
+                <span class="text-sm text-gray-500 uppercase tracking-wider">Event Bookings</span>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                <%= siteName %>
+            </h1>
+            <p class="text-gray-600 mb-8">
+                <%= siteDescription %>
+            </p>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Published Events</h2>
+
+            <% if (events.length===0) { %>
+                <p class="text-gray-500 italic">No published events available.</p>
+                <% } else { %>
+                    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <% events.forEach(event=> { %>
+                            <a href="/attendees/event/<%= event.id %>"
+                                class="block p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                <h3 class="font-semibold text-lg text-gray-900 mb-2">
+                                    <%= event.title %>
+                                </h3>
+                                <p class="text-gray-600">
+                                    <%= event.event_date %>
+                                </p>
+                            </a>
+                            <% }); %>
+                    </div>
+                    <% } %>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>

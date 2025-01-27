@@ -1,0 +1,99 @@
+<!-- START OF CODE WRITTEN WITHOUT ASSISTANCE -->
+<%- include('../partials/header') %>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="bg-white shadow-md rounded-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">
+                <%= event.title %>
+            </h1>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h2 class="text-xl font-semibold mb-4">Event Details</h2>
+                    <p class="text-gray-600 mb-4">
+                        <%= event.description %>
+                    </p>
+                    <p><strong>Date:</strong>
+                        <%= event.event_date %>
+                    </p>
+                    <p><strong>Status:</strong>
+                        <%= event.status %>
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-xl font-semibold mb-4">Ticket Information</h2>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="font-semibold">Full Price Tickets</h3>
+                            <p>Available: <%= event.full_price_ticket_count %>
+                            </p>
+                            <p>Price: £<%= event.full_price_ticket_cost %>
+                            </p>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h3 class="font-semibold">Concession Tickets</h3>
+                            <p>Available: <%= event.concession_ticket_count %>
+                            </p>
+                            <p>Price: £<%= event.concession_ticket_cost %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <h2 class="text-xl font-semibold mb-4">Bookings</h2>
+                <% if (bookings.length> 0) { %>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Full
+                                        Price</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                        Concession</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <% bookings.forEach(booking=> { %>
+                                    <tr>
+                                        <td class="px-6 py-4">
+                                            <%= booking.name %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= booking.email %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= booking.full_tickets_count %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= booking.concession_tickets_count %>
+                                        </td>
+                                        <td class="px-6 py-4">£<%= booking.total_amount %>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } else { %>
+                        <p class="text-gray-500 italic">No bookings yet.</p>
+                        <% } %>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+                <a href="/organizers/home" class="text-gray-600 hover:text-gray-800">← Back to Home</a>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+        <!-- END OF CODE WRITTEN WITHOUT ASSISTANCE -->

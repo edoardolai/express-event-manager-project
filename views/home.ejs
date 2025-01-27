@@ -1,0 +1,24 @@
+<!-- START OF CODE WRITTEN WITH ASSISTANCE FROM STACK OVERFLOW TUTORIAL ON HOW INCLUDE PARTIALS -->
+
+<%- include('partials/header') %>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-gray-900 mb-8">Welcome to Event Manager</h1>
+
+            <div class="space-y-4">
+                <a href="/attendees/home"
+                    class="block w-64 mx-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Attendees Home
+                </a>
+
+                <a href="/organizers/home"
+                    class="block w-64 mx-auto px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                    Organizers Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+        <!-- END OF CODE WRITTEN WITH ASSISTANCE  -->
