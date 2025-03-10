@@ -2,6 +2,12 @@
 
 A robust full-stack web application for managing events and ticket bookings, built with Node.js, Express, and SQLite. This project demonstrates practical implementation of web development concepts including authentication, session management, and database operations.
 
+
+
+https://github.com/user-attachments/assets/f94c0c69-896e-4540-ad0e-bf08c7af0968
+
+
+
 ## 🚀 Features
 
 - **User Authentication & Authorization**
